@@ -1,4 +1,4 @@
-<h1 align="center">📝 Notes Keeper – Flutter (Single File Project)</h1>
+<h1 align="center">📝 Notes Keeper – Flutter</h1>
 
 <p align="center">
   🚀 <strong>A simple CRUD Notes App in Flutter using Provider (in-memory)</strong> – Submitted as the first internship task at Marfah Technologies.
@@ -9,7 +9,7 @@
 ### 📋 Project Overview
 
 **Notes Keeper** is a lightweight mobile app built using **Flutter** and **Provider** for in-memory state management.  
-This project supports full **CRUD operations** (Create, Read, Update, Delete) and is developed as a **single Dart file** (`main.dart`) for quick prototyping and easy review.
+This project supports full **CRUD operations** (Create, Read, Update, Delete).
 
 ✅ **No Firebase**  
 ✅ **No local DB (like SQLite or Hive)**  
@@ -27,7 +27,6 @@ This project supports full **CRUD operations** (Create, Read, Update, Delete) an
 - Delete notes
 - Uses Provider for state management
 - All data is in-memory (lost on app restart)
-- Built fully in one file: `main.dart`
 
 ---
 
