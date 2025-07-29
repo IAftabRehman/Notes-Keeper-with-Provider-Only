@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_keeper_provider/providers/SplashScreen_Provider.dart';
-import 'package:notes_keeper_provider/providers/provider.dart';
+import 'package:notes_keeper_provider/providers/HomeScreen_Provider.dart';
 import 'package:notes_keeper_provider/screens/home_Screen.dart';
 import 'package:notes_keeper_provider/screens/splash_Screen.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/home': (context) => HomeScreen(), // Your HomeScreen here
+          '/home': (context) => HomeScreen(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
