@@ -14,130 +14,188 @@ class HomeScreen extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
     final provider = Provider.of<HomeProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 5,
-        shadowColor: Colors.blue,
-        backgroundColor: Colors.black54,
-        leading: provider.hasSelection
-            ? IconButton(
-                onPressed: () {
-                  provider.clearSelection();
-                },
-                icon: Icon(Icons.close, size: 30),
-              )
-            : null,
-        title: provider.hasSelection ? Text("Clear") : Text("Home Screen"),
-        actions: [
-          if (provider.hasSelection)
-            IconButton(
-              onPressed: () {
-                provider.clearSelection();
-              },
-              icon: IconButton(
-                onPressed: () {
-                  provider.deleteTask();
-                },
-                icon: Icon(Icons.delete_outline_rounded, size: 30),
-              ),
+      // appBar: AppBar(
+      //   flexibleSpace: ClipRRect(
+      //     borderRadius: BorderRadius.only(
+      //       bottomLeft: Radius.circular(10),
+      //       bottomRight: Radius.circular(10),
+      //     ),
+      //     child: Container(
+      //       color: Colors.blue, // Use gradient if you want
+      //     ),
+      //   ),
+      //   elevation: 5,
+      //   // shadowColor: Colors.blue,
+      //   // backgroundColor: Colors.black54,
+      //   leading: provider.hasSelection
+      //       ? IconButton(
+      //           onPressed: () {
+      //             provider.clearSelection();
+      //           },
+      //           icon: Icon(Icons.close, size: 30),
+      //         )
+      //       : null,
+      //   title: provider.hasSelection ? Text("Clear") : Text("Home Screen"),
+      //   actions: [
+      //     if (provider.hasSelection)
+      //       IconButton(
+      //         onPressed: () {
+      //           provider.clearSelection();
+      //         },
+      //         icon: IconButton(
+      //           onPressed: () {
+      //             provider.deleteTask();
+      //           },
+      //           icon: Icon(Icons.delete_outline_rounded, size: 30),
+      //         ),
+      //       ),
+      //   ],
+      // ),
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xff355C7D), Color(0xff6C5B7B), Color(0xffC06C84)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-        ],
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue, Colors.greenAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
           ),
-        ),
-        child: Consumer<HomeProvider>(
-          builder: (context, provider, child) {
-            return ListView.builder(
-              itemCount: provider.tasks.length,
-              itemBuilder: (context, index) {
-                final task = provider.tasks[index];
-                final isSelected = provider.isSelected(index);
-                return GestureDetector(
-                  onLongPress: () {
-                    provider.toggleSelection(index);
-                  },
-                  onTap: () {
-                    if (!provider.hasSelection) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateTaskScreen(
-                            title: "Name",
-                            description:
-                                "This is the description of notes picker app which is provided by Marfah Technologies",
-                          ),
-                        ),
-                      );
-                    } else {
-                      provider.toggleSelection(index);
-                    }
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: h * 0.11,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xff005aa7), Color(0xff7F7E72)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        color: isSelected ? Colors.teal : Colors.indigoAccent,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 1,
-                            color: Colors.black54,
-                            offset: Offset(5, 4),
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Text(
-                            task.title,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          ),
-                        ),
-                        subtitle: Text(
-                          task.description,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                        trailing: provider.hasSelection
-                            ? InkWell(
-                                onTap: () => provider.toggleSelection(index),
-                                child: Icon(
-                                  isSelected
-                                      ? Icons.check_box
-                                      : Icons.square_outlined,
-                                  color: isSelected ? Colors.green : Colors.grey,
-                                ),
-                              )
-                            : null,
-                      ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Container(
+                  height: h * 0.1,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.black26, Colors.black54],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+
                   ),
-                );
-              },
-            );
-          },
+                  child: Row(
+                    children: [
+                      provider.hasSelection
+                          ? IconButton(
+                              icon: Icon(Icons.clear, size: 30, color: Colors.white70),
+                              onPressed: () {
+                                provider.clearSelection();
+                              },
+                            )
+                          : const SizedBox(),
+                      Text(
+                        provider.hasSelection ? "Clear" : "  Home Screen",
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white70),
+                      ),
+                      Spacer(),
+                      provider.hasSelection ? IconButton(onPressed: (){
+                        provider.deleteTask();
+                      }, icon: Icon(Icons.delete_outline, size: 30, color: Colors.white70)) : SizedBox()
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Consumer<HomeProvider>(
+                  builder: (context, provider, child) {
+                    return ListView.builder(
+                      itemCount: provider.tasks.length,
+                      itemBuilder: (context, index) {
+                        final task = provider.tasks[index];
+                        final isSelected = provider.isSelected(index);
+                        return GestureDetector(
+                          onLongPress: () {
+                            provider.toggleSelection(index);
+                          },
+                          onTap: () {
+                            if (!provider.hasSelection) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CreateTaskScreen(
+                                    title: "Name",
+                                    description:
+                                        "This is the description of notes picker app which is provided by Marfah Technologies",
+                                  ),
+                                ),
+                              );
+                            } else {
+                              provider.toggleSelection(index);
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                            child: Container(
+                              height: h * 0.105,
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? Colors.white24
+                                    : Colors.brown,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: Colors.black54,
+                                    offset: Offset(5, 4),
+                                  ),
+                                ],
+                              ),
+                              child: ListTile(
+                                title: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 5,
+                                  ),
+                                  child: Text(
+                                    task.title,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  task.description,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                trailing: provider.hasSelection
+                                    ? InkWell(
+                                        onTap: () =>
+                                            provider.toggleSelection(index),
+                                        child: Icon(
+                                          isSelected
+                                              ? Icons.check_box
+                                              : Icons.square_outlined,
+                                          color: isSelected
+                                              ? Color(0xff004d00)
+                                              : Colors.grey, size: 30,
+                                        ),
+                                      )
+                                    : null,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
