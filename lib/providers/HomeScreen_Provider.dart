@@ -53,8 +53,8 @@ class HomeProvider extends ChangeNotifier {
 
   // Add Task
   void addTask(String title, String description) {
-    _tasks.add(TaskModel(title: title, description: description));
-    _saveTasks(); // Save after adding
+    _tasks.add(TaskModel(title: title, description: description, createdAt: DateTime.now()));
+    _saveTasks();
     notifyListeners();
   }
 
@@ -65,7 +65,39 @@ class HomeProvider extends ChangeNotifier {
       _tasks.removeAt(index);
     }
     _selectedIndexes.clear();
-    _saveTasks(); // Save after deleting
+    _saveTasks();
     notifyListeners();
   }
+
+
+  // Update Task
+  String _originalTitle = '';
+  String _originalDescription = '';
+  String _currentTitle = '';
+  String _currentDescription = '';
+
+  void setInitialValues(String title, String description) {
+    _originalTitle = title;
+    _originalDescription = description;
+    _currentTitle = title;
+    _currentDescription = description;
+    notifyListeners();
+  }
+
+  void updateTitle(String value) {
+    _currentTitle = value;
+    notifyListeners();
+  }
+
+  void updateDescription(String value) {
+    _currentDescription = value;
+    notifyListeners();
+  }
+
+  bool get isEdited =>
+      _currentTitle != _originalTitle ||
+          _currentDescription != _originalDescription;
+
+  String get title => _currentTitle;
+  String get description => _currentDescription;
 }

@@ -3,6 +3,7 @@ import 'package:notes_keeper_provider/screens/createTask_Screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/HomeScreen_Provider.dart';
 
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
@@ -14,43 +15,6 @@ class HomeScreen extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
     final provider = Provider.of<HomeProvider>(context);
     return Scaffold(
-      // appBar: AppBar(
-      //   flexibleSpace: ClipRRect(
-      //     borderRadius: BorderRadius.only(
-      //       bottomLeft: Radius.circular(10),
-      //       bottomRight: Radius.circular(10),
-      //     ),
-      //     child: Container(
-      //       color: Colors.blue, // Use gradient if you want
-      //     ),
-      //   ),
-      //   elevation: 5,
-      //   // shadowColor: Colors.blue,
-      //   // backgroundColor: Colors.black54,
-      //   leading: provider.hasSelection
-      //       ? IconButton(
-      //           onPressed: () {
-      //             provider.clearSelection();
-      //           },
-      //           icon: Icon(Icons.close, size: 30),
-      //         )
-      //       : null,
-      //   title: provider.hasSelection ? Text("Clear") : Text("Home Screen"),
-      //   actions: [
-      //     if (provider.hasSelection)
-      //       IconButton(
-      //         onPressed: () {
-      //           provider.clearSelection();
-      //         },
-      //         icon: IconButton(
-      //           onPressed: () {
-      //             provider.deleteTask();
-      //           },
-      //           icon: Icon(Icons.delete_outline_rounded, size: 30),
-      //         ),
-      //       ),
-      //   ],
-      // ),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -122,6 +86,7 @@ class HomeScreen extends StatelessWidget {
                                     title: "Name",
                                     description:
                                         "This is the description of notes picker app which is provided by Marfah Technologies",
+                                    createdAt: "Asdf"
                                   ),
                                 ),
                               );
@@ -137,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                                 color: isSelected
                                     ? Colors.white24
                                     : Colors.brown,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 1,
@@ -167,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                                   maxLines: 1,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 18,
+                                    fontSize: 17,
                                     color: Colors.white,
                                   ),
                                 ),
