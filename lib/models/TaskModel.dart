@@ -14,6 +14,6 @@ class TaskModel {
   factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
     title: json['title'],
     description: json['description'],
-    createdAt: json['createdAt']
+    createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String())
   );
 }

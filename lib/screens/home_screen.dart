@@ -1,70 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:notes_keeper_provider/screens/createTask_Screen.dart';
+import 'package:notes_keeper_provider/screens/create_task_screen.dart';
+import 'package:notes_keeper_provider/widgets/appBar_widget.dart';
 import 'package:provider/provider.dart';
 import '../providers/HomeScreen_Provider.dart';
 
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
-    final provider = Provider.of<HomeProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xff355C7D), Color(0xff6C5B7B), Color(0xffC06C84)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
           ),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Container(
-                  height: h * 0.1,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.black26, Colors.black54],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    ),
-
-                  ),
-                  child: Row(
-                    children: [
-                      provider.hasSelection
-                          ? IconButton(
-                              icon: Icon(Icons.clear, size: 30, color: Colors.white70),
-                              onPressed: () {
-                                provider.clearSelection();
-                              },
-                            )
-                          : const SizedBox(),
-                      Text(
-                        provider.hasSelection ? "Clear" : "  Home Screen",
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white70),
-                      ),
-                      Spacer(),
-                      provider.hasSelection ? IconButton(onPressed: (){
-                        provider.deleteTask();
-                      }, icon: Icon(Icons.delete_outline, size: 30, color: Colors.white70)) : SizedBox()
-                    ],
-                  ),
-                ),
-              ),
+              AppBarWidget(),
               Expanded(
                 child: Consumer<HomeProvider>(
                   builder: (context, provider, child) {
@@ -100,10 +67,10 @@ class HomeScreen extends StatelessWidget {
                               height: h * 0.105,
                               decoration: BoxDecoration(
                                 color: isSelected
-                                    ? Colors.white24
-                                    : Colors.brown,
+                                    ? const Color(0xff5D8AA8)
+                                    : const Color(0xff0071c5),
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 1,
                                     color: Colors.black54,
@@ -130,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                                   task.description,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
                                     color: Colors.white,
@@ -145,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                                               ? Icons.check_box
                                               : Icons.square_outlined,
                                           color: isSelected
-                                              ? Color(0xff004d00)
+                                              ? const Color(0xff004d00)
                                               : Colors.grey, size: 30,
                                         ),
                                       )

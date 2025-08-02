@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_keeper_provider/providers/SplashScreen_Provider.dart';
 import 'package:notes_keeper_provider/providers/HomeScreen_Provider.dart';
-import 'package:notes_keeper_provider/screens/home_Screen.dart';
+import 'package:notes_keeper_provider/screens/home_screen.dart';
 import 'package:notes_keeper_provider/screens/splash_Screen.dart';
 import 'package:provider/provider.dart';
 
