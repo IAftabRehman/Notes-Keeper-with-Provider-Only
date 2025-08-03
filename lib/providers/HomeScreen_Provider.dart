@@ -100,4 +100,16 @@ class HomeProvider extends ChangeNotifier {
 
   String get title => _currentTitle;
   String get description => _currentDescription;
+
+  void applyTaskUpdate(int index) {
+    if (index >= 0 && index < _tasks.length) {
+      _tasks[index] = TaskModel(
+        title: _currentTitle,
+        description: _currentDescription,
+        createdAt: _tasks[index].createdAt, // preserve original creation date
+      );
+      _saveTasks();
+      notifyListeners();
+    }
+  }
 }

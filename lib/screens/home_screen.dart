@@ -50,9 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CreateTaskScreen(
-                                    title: "Name",
-                                    description:
-                                        "This is the description of notes picker app which is provided by Marfah Technologies",
+                                    title: task.title,
+                                    description: task.description,
                                     createdAt: "Asdf"
                                   ),
                                 ),
