@@ -13,8 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xff355C7D), Color(0xff6C5B7B), Color(0xffC06C84)],
+              colors: [Color(0xff355C7D), Color(0xff6C5B7B), Color(0xff585C5C)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
           ),
           child: Column(
             children: [
-              AppBarWidget(),
+              const AppBarWidget(),
               Expanded(
                 child: Consumer<HomeProvider>(
                   builder: (context, provider, child) {
@@ -50,9 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CreateTaskScreen(
+                                    index: index,
                                     title: task.title,
                                     description: task.description,
-                                    createdAt: "Asdf"
+                                    createdAt: task.createdAt
                                   ),
                                 ),
                               );
@@ -84,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   child: Text(
                                     task.title,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -134,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
             ),
             builder: (context) => Padding(
@@ -151,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Created Task",
                       style: TextStyle(
                         fontSize: 20,
@@ -161,12 +162,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 20),
                     TextField(
                       controller: titleController,
-                      decoration: InputDecoration(labelText: "Title"),
+                      decoration: const InputDecoration(labelText: "Title"),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: descriptionController,
-                      decoration: InputDecoration(labelText: "Note Down"),
+                      decoration: const InputDecoration(labelText: "Note Down"),
                     ),
                     const SizedBox(height: 20),
                     Row(
@@ -175,8 +176,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         IconButton(
                           onPressed: () {
                             Navigator.pop(context);
+                            titleController.clear();
+                            descriptionController.clear();
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.cancel_outlined,
                             size: 40,
                             color: Colors.red,
@@ -192,10 +195,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 listen: false,
                               ).addTask(title, desc);
-                              Navigator.pop(context); // close bottom sheet
+                              Navigator.pop(context);
+                              titleController.clear();
+                              descriptionController.clear();
                             }
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.done_all_outlined,
                             size: 40,
                             color: Colors.green,
@@ -209,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

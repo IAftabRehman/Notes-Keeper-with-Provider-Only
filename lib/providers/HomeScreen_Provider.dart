@@ -25,8 +25,8 @@ class HomeProvider extends ChangeNotifier {
   bool get hasSelection => _selectedIndexes.isNotEmpty;
 
   // Task List
-  final List<TaskModel> _tasks = [];
-  List<TaskModel> get tasks => _tasks;
+  final List<NotesModel> _tasks = [];
+  List<NotesModel> get tasks => _tasks;
 
   // Save to SharedPreferences
   Future<void> _saveTasks() async {
@@ -45,7 +45,7 @@ class HomeProvider extends ChangeNotifier {
       _tasks.clear();
       _tasks.addAll(taskJsonList.map((jsonTask) {
         final map = jsonDecode(jsonTask);
-        return TaskModel.fromJson(map);
+        return NotesModel.fromJson(map);
       }));
       notifyListeners();
     }
@@ -53,7 +53,7 @@ class HomeProvider extends ChangeNotifier {
 
   // Add Task
   void addTask(String title, String description) {
-    _tasks.add(TaskModel(title: title, description: description, createdAt: DateTime.now()));
+    _tasks.add(NotesModel(title: title, description: description, createdAt: DateTime.now()));
     _saveTasks();
     notifyListeners();
   }
@@ -101,12 +101,14 @@ class HomeProvider extends ChangeNotifier {
   String get title => _currentTitle;
   String get description => _currentDescription;
 
+
+  // Updating Tasks
   void applyTaskUpdate(int index) {
     if (index >= 0 && index < _tasks.length) {
-      _tasks[index] = TaskModel(
+      _tasks[index] = NotesModel(
         title: _currentTitle,
         description: _currentDescription,
-        createdAt: _tasks[index].createdAt, // preserve original creation date
+        createdAt: _tasks[index].createdAt,
       );
       _saveTasks();
       notifyListeners();

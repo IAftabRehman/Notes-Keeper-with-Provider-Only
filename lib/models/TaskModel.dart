@@ -1,19 +1,23 @@
-class TaskModel {
+class NotesModel {
   final String title;
   final String description;
   final DateTime createdAt;
 
-  TaskModel({required this.title, required this.description, required this.createdAt});
+  NotesModel({
+    required this.title,
+    required this.description,
+    required this.createdAt,
+  });
 
   Map<String, dynamic> toJson() => {
     'title': title,
     'description': description,
-    'createdAt' : createdAt
+    'createdAt': createdAt.toIso8601String()
   };
 
-  factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
+  factory NotesModel.fromJson(Map<String, dynamic> json) => NotesModel(
     title: json['title'],
     description: json['description'],
-    createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String())
+    createdAt: DateTime.parse(json['createdAt'])
   );
 }

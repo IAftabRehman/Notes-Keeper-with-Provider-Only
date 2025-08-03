@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:notes_keeper_provider/providers/HomeScreen_Provider.dart';
+import 'package:notes_keeper_provider/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class CreateTaskScreen extends StatefulWidget {
   final String title;
   final String description;
-  final String createdAt;
+  final DateTime createdAt;
+  final int index;
 
   const CreateTaskScreen({
     required this.title,
     required this.description,
     required this.createdAt,
+    required this.index,
     super.key,
   });
 
@@ -21,6 +25,7 @@ class CreateTaskScreen extends StatefulWidget {
 class _CreateTaskScreenState extends State<CreateTaskScreen> {
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
+
 
   @override
   void initState() {
@@ -57,7 +62,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           height: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xff355C7D), Color(0xff6C5B7B), Color(0xffC06C84)],
+              colors: [Color(0xff355C7D), Color(0xff6C5B7B), Color(0xff585C5C)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -80,9 +85,16 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                 ),
                 child: Row(
                   children: [
-                    IconButton(icon: Icon(Icons.keyboard_arrow_left, size: 35, color: Colors.white), onPressed: (){
-                      Navigator.pop(context);
-                    }),
+                    IconButton(
+                      icon: Icon(
+                        Icons.keyboard_arrow_left,
+                        size: 35,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -123,26 +135,44 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                       const SizedBox(height: 5),
                       TextField(
                         controller: _descriptionController,
-                        style: const TextStyle(fontSize: 18, color: Colors.white),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                         maxLines: null,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                         ),
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 18),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: Text(
-                          widget.createdAt,
-                          style: const TextStyle(fontSize: 18, color: Colors.white),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 0.7, color: Colors.blue)
+                          ),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            DateFormat('d - MMMM').format(widget.createdAt),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 20),
+                      const Divider(),
+                      const SizedBox(height: 20),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: ElevatedButton(
                           onPressed: () {
-                            provider.updateTitle(widget.title);
+                            if (provider.isEdited) {
+                              provider.applyTaskUpdate(widget.index);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                            }
                             provider.isEdited ? Navigator.pop(context) : null;
                           },
                           style: ElevatedButton.styleFrom(
@@ -150,7 +180,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                                 ? Colors.red
                                 : Colors.blue,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             minimumSize: const Size(130, 45),
                           ),
