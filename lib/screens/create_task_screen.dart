@@ -177,8 +177,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: provider.isEdited
-                                ? Colors.red
-                                : Colors.blue,
+                                ? Colors.blue
+                                : Colors.grey,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),

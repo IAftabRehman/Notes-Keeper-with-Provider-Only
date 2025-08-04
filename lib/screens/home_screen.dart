@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notes_keeper_provider/screens/create_task_screen.dart';
 import 'package:notes_keeper_provider/widgets/appBar_widget.dart';
 import 'package:provider/provider.dart';
+import '../const/app_theme.dart';
 import '../providers/HomeScreen_Provider.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,13 +18,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final gradientColors = isDarkMode
+        ? AppTheme.backGround_dark
+        : AppTheme.backGround_light;
+    // final selectedTaskColor = isDarkMode
+    //     ? AppTheme.taskSelected_Dark
+    //     : AppTheme.taskSelected_Light;
+    // final UnSelectedTaskColor = isDarkMode
+    //     ? AppTheme.taskUnSelected_Dark
+    //     : AppTheme.taskUnSelected_Light;
     final h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xff355C7D), Color(0xff6C5B7B), Color(0xff585C5C)],
+              colors: gradientColors,
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -53,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     index: index,
                                     title: task.title,
                                     description: task.description,
-                                    createdAt: task.createdAt
+                                    createdAt: task.createdAt,
                                   ),
                                 ),
                               );
@@ -62,7 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             }
                           },
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 8,
+                            ),
                             child: Container(
                               height: h * 0.105,
                               decoration: BoxDecoration(
@@ -113,7 +126,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               : Icons.square_outlined,
                                           color: isSelected
                                               ? const Color(0xff004d00)
-                                              : Colors.grey, size: 30,
+                                              : Colors.grey,
+                                          size: 30,
                                         ),
                                       )
                                     : null,

@@ -6,11 +6,8 @@ class SplashScreenProvider with ChangeNotifier {
   double _width = 0;
   double _height = 0;
   bool _animated = false;
-
   double get width => _width;
-
   double get height => _height;
-
   bool get animated => _animated;
 
   SplashScreenProvider() {

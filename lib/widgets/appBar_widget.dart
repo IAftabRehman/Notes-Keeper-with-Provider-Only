@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_keeper_provider/providers/HomeScreen_Provider.dart';
 import 'package:provider/provider.dart';
+import '../providers/ThemeChanger_Provider.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({super.key});
@@ -9,6 +10,7 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final provider = Provider.of<HomeProvider>(context);
+    final themeProvider = Provider.of<ThemeChangerProvider>(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Container(
@@ -42,7 +44,13 @@ class AppBarWidget extends StatelessWidget {
             Spacer(),
             provider.hasSelection ? IconButton(onPressed: (){
               provider.deleteTask();
-            }, icon: Icon(Icons.delete_outline, size: 30, color: Colors.white70)) : SizedBox()
+            }, icon: Icon(Icons.delete_outline, size: 30, color: Colors.white70)) : IconButton(icon: Icon(Icons.dark_mode, size: 35, color: Colors.white), onPressed: (){
+              if(themeProvider.themeMode == ThemeMode.light){
+                  themeProvider.setTheme(ThemeMode.dark);
+              }else{
+                  themeProvider.setTheme(ThemeMode.light);
+              }
+            })
           ],
         ),
       ),
