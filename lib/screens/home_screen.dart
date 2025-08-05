@@ -20,14 +20,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final gradientColors = isDarkMode
-        ? AppTheme.backGround_dark
-        : AppTheme.backGround_light;
-    // final selectedTaskColor = isDarkMode
-    //     ? AppTheme.taskSelected_Dark
-    //     : AppTheme.taskSelected_Light;
-    // final UnSelectedTaskColor = isDarkMode
-    //     ? AppTheme.taskUnSelected_Dark
-    //     : AppTheme.taskUnSelected_Light;
+        ? AppTheme.backgroundDark
+        : AppTheme.backgroundLight;
+    final selectedTaskColor = isDarkMode
+        ? AppTheme.taskSelectedDark
+        : AppTheme.taskSelectedLight;
+    final unSelectedTaskColor = isDarkMode
+        ? AppTheme.taskUnSelectedDark
+        : AppTheme.taskUnSelectedLight;
+    final containerShadow = isDarkMode
+        ? AppTheme.containerShadowDark
+        : AppTheme.containerShadowLight;
     final h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -80,14 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: h * 0.105,
                               decoration: BoxDecoration(
                                 color: isSelected
-                                    ? const Color(0xff5D8AA8)
-                                    : const Color(0xff0071c5),
+                                    ? selectedTaskColor
+                                    : unSelectedTaskColor,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
+                                boxShadow: [
                                   BoxShadow(
                                     blurRadius: 1,
-                                    color: Colors.black54,
-                                    offset: Offset(5, 4),
+                                    color: containerShadow,
+                                    offset: const Offset(5, 4),
                                   ),
                                 ],
                               ),

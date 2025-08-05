@@ -8,6 +8,7 @@ class AppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // bool dayMode = true;
     final h = MediaQuery.of(context).size.height;
     final provider = Provider.of<HomeProvider>(context);
     final themeProvider = Provider.of<ThemeChangerProvider>(context);
@@ -31,26 +32,49 @@ class AppBarWidget extends StatelessWidget {
           children: [
             provider.hasSelection
                 ? IconButton(
-              icon: Icon(Icons.clear, size: 30, color: Colors.white70),
-              onPressed: () {
-                provider.clearSelection();
-              },
-            )
+                    icon: Icon(Icons.clear, size: 30, color: Colors.white70),
+                    onPressed: () {
+                      provider.clearSelection();
+                    },
+                  )
                 : const SizedBox(),
             Text(
               provider.hasSelection ? "Clear" : "    Notes Board",
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white70),
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white70,
+              ),
             ),
             Spacer(),
-            provider.hasSelection ? IconButton(onPressed: (){
-              provider.deleteTask();
-            }, icon: Icon(Icons.delete_outline, size: 30, color: Colors.white70)) : IconButton(icon: Icon(Icons.dark_mode, size: 35, color: Colors.white), onPressed: (){
-              if(themeProvider.themeMode == ThemeMode.light){
-                  themeProvider.setTheme(ThemeMode.dark);
-              }else{
-                  themeProvider.setTheme(ThemeMode.light);
-              }
-            })
+            provider.hasSelection
+                ? IconButton(
+                    onPressed: () {
+                      provider.deleteTask();
+                    },
+                    icon: Icon(
+                      Icons.delete_outline,
+                      size: 30,
+                      color: Colors.white70,
+                    ),
+                  )
+                : IconButton(
+                    icon: provider.dayMode
+                        ? Icon(Icons.light_mode, size: 35, color: Colors.white)
+                        : Icon(Icons.dark_mode, size: 35, color: Colors.white),
+                    onPressed: () {
+                      if(provider.dayMode == false){
+                        provider.changeMode(true);
+                      }else{
+                        provider.changeMode(false);
+                      }
+                      if (themeProvider.themeMode == ThemeMode.light) {
+                        themeProvider.setTheme(ThemeMode.dark);
+                      } else {
+                        themeProvider.setTheme(ThemeMode.light);
+                      }
+                    },
+                  ),
           ],
         ),
       ),

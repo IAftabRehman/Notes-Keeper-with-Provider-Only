@@ -23,10 +23,18 @@ class HomeProvider extends ChangeNotifier {
   }
 
   bool get hasSelection => _selectedIndexes.isNotEmpty;
-
   // Task List
   final List<NotesModel> _tasks = [];
   List<NotesModel> get tasks => _tasks;
+
+
+  bool _dayMode = true;
+  bool get dayMode => _dayMode;
+
+  void changeMode(bool value){
+    _dayMode = value;
+    notifyListeners();
+  }
 
   // Save to SharedPreferences
   Future<void> _saveTasks() async {
