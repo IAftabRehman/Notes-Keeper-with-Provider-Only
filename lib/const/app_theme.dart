@@ -15,15 +15,24 @@ class AppTheme {
   );
 
   static const List<Color> backgroundLight = [
-    Color(0xff355C7D),
+    Color(0xff636363),
     Color(0xff6C5B7B),
-    Color(0xff585C5C),
+    Color(0xffa2ab58),
   ];
 
   static const List<Color> backgroundDark = [
     Color(0xff232526),
+    Colors.deepPurple,
+    Colors.purple,
+  ];
+
+  static const List<Color> appBarColorLight = [
+    Color(0xff4169E1),
+    Color(0xff6495ED),
+  ];
+  static const List<Color> appBarColorDark = [
+    Colors.white24,
     Color(0xff414345),
-    Color(0xff000000),
   ];
 
   static const Color taskUnSelectedLight = Color(0xff0071c5);
@@ -34,5 +43,4 @@ class AppTheme {
 
   static const Color containerShadowLight = Colors.black54;
   static const Color containerShadowDark = Colors.white24;
-
 }
