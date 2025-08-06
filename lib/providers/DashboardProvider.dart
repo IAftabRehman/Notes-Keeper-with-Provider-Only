@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/TaskModel.dart';
+import '../models/NoteModel.dart';
 
-class HomeProvider extends ChangeNotifier {
+class DashboardProvider extends ChangeNotifier {
   final List<int> _selectedIndexes = [];
   List<int> get selectedIndexes => _selectedIndexes;
   bool isSelected(int index) => _selectedIndexes.contains(index);

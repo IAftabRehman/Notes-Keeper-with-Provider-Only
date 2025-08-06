@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:notes_keeper_provider/providers/HomeScreen_Provider.dart';
-import 'package:notes_keeper_provider/screens/home_screen.dart';
+import 'package:notes_keeper_provider/providers/DashboardProvider.dart';
+import 'package:notes_keeper_provider/screens/DashboardScreen.dart';
 import 'package:provider/provider.dart';
-
-import '../const/app_theme.dart';
+import '../const/ThemeColor.dart';
 import '../providers/ThemeChanger_Provider.dart';
 
-class CreateTaskScreen extends StatefulWidget {
+class NoteOpenScreen extends StatefulWidget {
   final String title;
   final String description;
   final DateTime createdAt;
   final int index;
 
-  const CreateTaskScreen({
+  const NoteOpenScreen({
     required this.title,
     required this.description,
     required this.createdAt,
@@ -22,18 +21,17 @@ class CreateTaskScreen extends StatefulWidget {
   });
 
   @override
-  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
+  State<NoteOpenScreen> createState() => _NoteOpenScreenState();
 }
 
-class _CreateTaskScreenState extends State<CreateTaskScreen> {
+class _NoteOpenScreenState extends State<NoteOpenScreen> {
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
-
 
   @override
   void initState() {
     super.initState();
-    final provider = Provider.of<HomeProvider>(context, listen: false);
+    final provider = Provider.of<DashboardProvider>(context, listen: false);
     provider.setInitialValues(widget.title, widget.description);
 
     _titleController = TextEditingController(text: widget.title);
@@ -57,13 +55,14 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeChangerProvider>(context);
-    final provider = Provider.of<HomeProvider>(context);
+    final provider = Provider.of<DashboardProvider>(context);
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDarkMode
-        ? AppTheme.backgroundDark
-        : AppTheme.backgroundLight;
+        ? ThemeColor.backgroundDark
+        : ThemeColor.backgroundLight;
     final appbarColor = isDarkMode
-        ? AppTheme.appBarColorDark : AppTheme.appBarColorLight;
+        ? ThemeColor.appBarColorDark
+        : ThemeColor.appBarColorLight;
     final h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -122,35 +121,42 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     const Spacer(),
                     provider.hasSelection
                         ? IconButton(
-                      onPressed: () {
-                        provider.deleteTask();
-                      },
-                      icon: Icon(
-                        Icons.delete_outline,
-                        size: 30,
-                        color: Colors.white70,
-                      ),
-                    )
+                            onPressed: () {
+                              provider.deleteTask();
+                            },
+                            icon: Icon(
+                              Icons.delete_outline,
+                              size: 30,
+                              color: Colors.white70,
+                            ),
+                          )
                         : IconButton(
-                      icon: provider.dayMode
-                          ? Icon(Icons.light_mode, size: 35, color: Colors.white)
-                          : Icon(Icons.dark_mode, size: 35, color: Colors.white),
-                      onPressed: () {
-                        if (provider.dayMode == false) {
-                          provider.changeMode(true);
-                        } else {
-                          provider.changeMode(false);
-                        }
-                        if (themeProvider.themeMode == ThemeMode.light) {
-                          themeProvider.setTheme(ThemeMode.dark);
-                        } else {
-                          themeProvider.setTheme(ThemeMode.light);
-                        }
-                      },
-                    ),
+                            icon: provider.dayMode
+                                ? Icon(
+                                    Icons.light_mode,
+                                    size: 35,
+                                    color: Colors.white,
+                                  )
+                                : Icon(
+                                    Icons.dark_mode,
+                                    size: 35,
+                                    color: Colors.white,
+                                  ),
+                            onPressed: () {
+                              if (provider.dayMode == false) {
+                                provider.changeMode(true);
+                              } else {
+                                provider.changeMode(false);
+                              }
+                              if (themeProvider.themeMode == ThemeMode.light) {
+                                themeProvider.setTheme(ThemeMode.dark);
+                              } else {
+                                themeProvider.setTheme(ThemeMode.light);
+                              }
+                            },
+                          ),
                   ],
                 ),
-
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -190,7 +196,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 0.7, color: Colors.blue)
+                            border: Border.all(width: 0.7, color: Colors.blue),
                           ),
                           padding: EdgeInsets.all(10),
                           child: Text(
@@ -203,9 +209,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Divider(
-                        color: Colors.white,
-                      ),
+                      const Divider(color: Colors.white),
                       const SizedBox(height: 20),
                       Align(
                         alignment: Alignment.bottomCenter,
@@ -213,7 +217,12 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                           onPressed: () {
                             if (provider.isEdited) {
                               provider.applyTaskUpdate(widget.index);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DashboardScreen(),
+                                ),
+                              );
                             }
                             provider.isEdited ? Navigator.pop(context) : null;
                           },

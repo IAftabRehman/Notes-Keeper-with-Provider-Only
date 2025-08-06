@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notes_keeper_provider/providers/HomeScreen_Provider.dart';
+import 'package:notes_keeper_provider/providers/DashboardProvider.dart';
 import 'package:provider/provider.dart';
+import '../const/ThemeColor.dart';
 import '../providers/ThemeChanger_Provider.dart';
-import '../const/app_theme.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({super.key});
@@ -10,12 +10,12 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
-    final provider = Provider.of<HomeProvider>(context);
+    final provider = Provider.of<DashboardProvider>(context);
     final themeProvider = Provider.of<ThemeChangerProvider>(context);
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final appbarColor = isDarkMode
-        ? AppTheme.appBarColorDark
-        : AppTheme.appBarColorLight;
+        ? ThemeColor.appBarColorDark
+        : ThemeColor.appBarColorLight;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Container(

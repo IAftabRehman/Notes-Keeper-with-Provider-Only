@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class SplashScreenProvider with ChangeNotifier {
-  // For Splash Screen
   double _width = 0;
   double _height = 0;
   bool _animated = false;
@@ -15,7 +14,7 @@ class SplashScreenProvider with ChangeNotifier {
   }
 
   void _startTimer() {
-    Timer(Duration(milliseconds: 1), () {
+    Timer(Duration(milliseconds: 2), () {
       _runAnimation();
     });
   }
@@ -28,7 +27,7 @@ class SplashScreenProvider with ChangeNotifier {
   }
 
   void moveToHome(BuildContext context) {
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 4), () {
       Navigator.pushReplacementNamed(context, '/home');
     });
   }

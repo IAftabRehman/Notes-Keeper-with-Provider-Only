@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppTheme {
+class ThemeColor {
   static const lightMode = ThemeMode.light;
   static const darkMode = ThemeMode.dark;
 

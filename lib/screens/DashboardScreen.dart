@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:notes_keeper_provider/screens/create_task_screen.dart';
-import 'package:notes_keeper_provider/widgets/appBar_widget.dart';
+import 'package:notes_keeper_provider/screens/NoteOpenScreen.dart';
+import 'package:notes_keeper_provider/widgets/AppBarWidget.dart';
 import 'package:provider/provider.dart';
-import '../const/app_theme.dart';
-import '../providers/HomeScreen_Provider.dart';
+import '../const/ThemeColor.dart';
+import '../providers/DashboardProvider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _DashboardScreenState extends State<DashboardScreen> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
@@ -20,17 +20,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final gradientColors = isDarkMode
-        ? AppTheme.backgroundDark
-        : AppTheme.backgroundLight;
+        ? ThemeColor.backgroundDark
+        : ThemeColor.backgroundLight;
     final selectedTaskColor = isDarkMode
-        ? AppTheme.taskSelectedDark
-        : AppTheme.taskSelectedLight;
+        ? ThemeColor.taskSelectedDark
+        : ThemeColor.taskSelectedLight;
     final unSelectedTaskColor = isDarkMode
-        ? AppTheme.taskUnSelectedDark
-        : AppTheme.taskUnSelectedLight;
+        ? ThemeColor.taskUnSelectedDark
+        : ThemeColor.taskUnSelectedLight;
     final containerShadow = isDarkMode
-        ? AppTheme.containerShadowDark
-        : AppTheme.containerShadowLight;
+        ? ThemeColor.containerShadowDark
+        : ThemeColor.containerShadowLight;
     final h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const AppBarWidget(),
               Expanded(
-                child: Consumer<HomeProvider>(
+                child: Consumer<DashboardProvider>(
                   builder: (context, provider, child) {
                     return ListView.builder(
                       itemCount: provider.tasks.length,
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CreateTaskScreen(
+                                  builder: (context) => NoteOpenScreen(
                                     index: index,
                                     title: task.title,
                                     description: task.description,
@@ -208,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             final desc = descriptionController.text.trim();
 
                             if (title.isNotEmpty && desc.isNotEmpty) {
-                              Provider.of<HomeProvider>(
+                              Provider.of<DashboardProvider>(
                                 context,
                                 listen: false,
                               ).addTask(title, desc);

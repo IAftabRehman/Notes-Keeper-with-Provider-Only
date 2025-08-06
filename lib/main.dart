@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:notes_keeper_provider/providers/SplashScreen_Provider.dart';
-import 'package:notes_keeper_provider/providers/HomeScreen_Provider.dart';
+import 'package:notes_keeper_provider/providers/DashboardProvider.dart';
 import 'package:notes_keeper_provider/providers/ThemeChanger_Provider.dart';
-import 'package:notes_keeper_provider/screens/home_screen.dart';
-import 'package:notes_keeper_provider/screens/splash_Screen.dart';
+import 'package:notes_keeper_provider/screens/DashboardScreen.dart';
+import 'package:notes_keeper_provider/screens/SplashScreen.dart';
 import 'package:provider/provider.dart';
-import 'const/app_theme.dart';
+import 'const/ThemeColor.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SplashScreenProvider()),
         ChangeNotifierProvider(
           create: (_) {
-            final homeProvider = HomeProvider();
+            final homeProvider = DashboardProvider();
             homeProvider.loadTasks();
             return homeProvider;
           },
@@ -34,13 +34,12 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           themeMode: provider.themeMode,
           initialRoute: '/',
-          routes: {'/home': (context) => HomeScreen()},
-          title: 'Flutter Demo',
-          // theme: ThemeData(
-          //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          // ),
-          darkTheme: AppTheme.darkTheme,
-          theme: AppTheme.lightTheme,
+          routes: {
+            '/home': (context) => DashboardScreen(),
+          },
+          title: 'Note Picker',
+          darkTheme: ThemeColor.darkTheme,
+          theme: ThemeColor.lightTheme,
           home: SplashScreen(),
         );
       })
