@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_keeper_provider/providers/DashboardProvider.dart';
 import 'package:provider/provider.dart';
+import '../const/Fonts.dart';
 import '../const/ThemeColor.dart';
 import '../providers/ThemeChanger_Provider.dart';
 
@@ -43,12 +44,8 @@ class AppBarWidget extends StatelessWidget {
                   )
                 : const SizedBox(),
             Text(
-              provider.hasSelection ? "Clear" : "    Notes Board",
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.white70,
-              ),
+              provider.hasSelection ? "Clear" : "   Notes Board",
+              style: AppFont.appBarText
             ),
             Spacer(),
             provider.hasSelection

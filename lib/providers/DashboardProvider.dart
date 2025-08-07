@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/NoteModel.dart';
 
 class DashboardProvider extends ChangeNotifier {
+
+  // Selected Index
   final List<int> _selectedIndexes = [];
   List<int> get selectedIndexes => _selectedIndexes;
   bool isSelected(int index) => _selectedIndexes.contains(index);
@@ -23,6 +25,8 @@ class DashboardProvider extends ChangeNotifier {
   }
 
   bool get hasSelection => _selectedIndexes.isNotEmpty;
+
+
   // Task List
   final List<NotesModel> _tasks = [];
   List<NotesModel> get tasks => _tasks;
@@ -116,7 +120,7 @@ class DashboardProvider extends ChangeNotifier {
       _tasks[index] = NotesModel(
         title: _currentTitle,
         description: _currentDescription,
-        createdAt: _tasks[index].createdAt,
+        createdAt: DateTime.now(),
       );
       _saveTasks();
       notifyListeners();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_keeper_provider/const/Fonts.dart';
 import 'package:notes_keeper_provider/screens/NoteOpenScreen.dart';
 import 'package:notes_keeper_provider/widgets/AppBarWidget.dart';
 import 'package:provider/provider.dart';
@@ -101,10 +102,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ),
                                   child: Text(
                                     task.title,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                    style: AppFont.noteTitle,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                   ),
@@ -113,11 +111,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   task.description,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                    color: Colors.white,
-                                  ),
+                                  style: AppFont.noteDescription,
                                 ),
                                 trailing: provider.hasSelection
                                     ? InkWell(

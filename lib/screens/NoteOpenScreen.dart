@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:notes_keeper_provider/const/Fonts.dart';
 import 'package:notes_keeper_provider/providers/DashboardProvider.dart';
 import 'package:notes_keeper_provider/screens/DashboardScreen.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,10 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
   void initState() {
     super.initState();
     final provider = Provider.of<DashboardProvider>(context, listen: false);
-    provider.setInitialValues(widget.title, widget.description);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<DashboardProvider>(context, listen: false)
+          .setInitialValues(widget.title, widget.description);
+    });
 
     _titleController = TextEditingController(text: widget.title);
     _descriptionController = TextEditingController(text: widget.description);
@@ -110,11 +114,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
                           "Note",
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          style: AppFont.appBarText
                         ),
                       ),
                     ),
@@ -169,11 +169,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                     children: [
                       TextField(
                         controller: _titleController,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 26,
-                        ),
+                        style: AppFont.openNoteTitle,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                         ),
@@ -181,10 +177,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                       const SizedBox(height: 5),
                       TextField(
                         controller: _descriptionController,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
+                        style: AppFont.openNoteDescription,
                         maxLines: null,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
@@ -224,7 +217,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                                 ),
                               );
                             }
-                            provider.isEdited ? Navigator.pop(context) : null;
+                            provider.isEdited ? Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardScreen())) : null;
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: provider.isEdited
