@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: Center(
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 900),
+          duration: const Duration(milliseconds: 900),
           height: provider.height,
           width: provider.width,
           child: Image.asset(

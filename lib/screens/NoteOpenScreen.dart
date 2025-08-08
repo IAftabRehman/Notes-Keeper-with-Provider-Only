@@ -91,7 +91,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     bottomRight: Radius.circular(15),
                   ),
@@ -99,7 +99,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.keyboard_arrow_left,
                         size: 35,
                         color: Colors.white,
@@ -124,7 +124,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                             onPressed: () {
                               provider.deleteTask();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.delete_outline,
                               size: 30,
                               color: Colors.white70,
@@ -132,12 +132,12 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                           )
                         : IconButton(
                             icon: provider.dayMode
-                                ? Icon(
+                                ? const Icon(
                                     Icons.light_mode,
                                     size: 35,
                                     color: Colors.white,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.dark_mode,
                                     size: 35,
                                     color: Colors.white,
@@ -191,7 +191,7 @@ class _NoteOpenScreenState extends State<NoteOpenScreen> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(width: 0.7, color: Colors.blue),
                           ),
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Text(
                             DateFormat('d - MMMM').format(widget.createdAt),
                             style: const TextStyle(

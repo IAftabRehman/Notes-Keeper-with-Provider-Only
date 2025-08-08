@@ -1,7 +1,7 @@
 <h1 align="center">📝 Notes Keeper – Flutter</h1>
 
 <p align="center">
-  🚀 <strong>A simple CRUD Notes App in Flutter using Provider (in-memory)</strong> – Submitted as the first internship task at Marfah Technologies.
+  🚀 <strong>A simple CRUD Notes App in Flutter using Provider (in-memory)</strong>
 </p>
 
 ---
@@ -15,6 +15,7 @@ This project supports full **CRUD operations** (Create, Read, Update, Delete).
 ✅ **No local DB (like SQLite or Hive)**  
 ✅ **No APIs**  
 ✅ **Pure UI + Provider logic only**
+✅ **For Local Storage (SharedPreference)**
 
 ---
 
@@ -26,7 +27,6 @@ This project supports full **CRUD operations** (Create, Read, Update, Delete).
 - Edit existing notes
 - Delete notes
 - Uses Provider for state management
-- All data is in-memory (lost on app restart)
 
 ---
 
@@ -35,6 +35,7 @@ This project supports full **CRUD operations** (Create, Read, Update, Delete).
 - **Flutter** – UI development
 - **Dart** – Programming language
 - **Provider** – State management
+- **SharedPreference** – Local Storage
 
 ---
 

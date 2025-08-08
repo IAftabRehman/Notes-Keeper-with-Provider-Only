@@ -36,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
+          decoration:BoxDecoration(
             gradient: LinearGradient(
               colors: gradientColors,
               begin: Alignment.topCenter,
