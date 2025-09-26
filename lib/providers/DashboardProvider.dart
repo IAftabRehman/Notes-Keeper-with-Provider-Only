@@ -37,6 +37,7 @@ class DashboardProvider extends ChangeNotifier {
 
   void changeMode(bool value){
     _dayMode = value;
+    _saveTasks();
     notifyListeners();
   }
 

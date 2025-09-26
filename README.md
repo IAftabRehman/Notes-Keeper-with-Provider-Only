@@ -14,7 +14,7 @@ This project supports full **CRUD operations** (Create, Read, Update, Delete).
 ✅ **No Firebase**  
 ✅ **No local DB (like SQLite or Hive)**  
 ✅ **No APIs**  
-✅ **Pure UI + Provider logic only**
+✅ **Pure UI + Provider logic only**  
 ✅ **For Local Storage (SharedPreference)**
 
 ---
@@ -39,46 +39,20 @@ This project supports full **CRUD operations** (Create, Read, Update, Delete).
 
 ---
 
+### 📱 Screenshots
+
+| Splash Screen                                               |
+|-------------------------------------------------------------|
+| <img src="assets/screenshots/splashScreen.png" width="250"> |
+
+| Edit Note |
+|-----------|
+| <img src="assets/screenshots/edit_note.png" width="250"> |
+
+---
+
 ### 🛠️ Getting Started
 
 1. Clone this repository:
    ```bash
    git clone https://github.com/IAftabRehman/Notes-Keeper-with-Provider-Only.git
-   
-2. Navigate to the project folder:
-   ```bash
-   cd Notes-Keeper-with-Provider-Only
-
-3. Install dependencies:
-   flutter pub get
-
-4. Run the app:
-    flutter run
-
-
----
-
-### 💬 Ask Me Anything!
-
-Got suggestions or feedback? Feel free to contact:
-
-📧 **Email:** iamaftabrehman@gmail.com  
-🧑‍💻 **GitHub:** [IAftabRehman](https://github.com/IAftabRehman)  
-💼 **LinkedIn:** [Aftab Rehman](https://www.linkedin.com/in/aftab-rehman)
-
----
-
-### 📊 GitHub Stats
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=IAftabRehman&show_icons=true&theme=tokyonight" height="180"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=IAftabRehman&layout=compact&theme=tokyonight" height="180"/>
-</div>
-
----
-
-<p align="center">
-  🌟 Star this repo if it helped you!
-  <br/>
-  Made with ❤️ by <a href="https://github.com/IAftabRehman">IAftabRehman</a>
-</p>
