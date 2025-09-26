@@ -43,7 +43,7 @@ This project supports full **CRUD operations** (Create, Read, Update, Delete).
 
 | Splash Screen                                               |
 |-------------------------------------------------------------|
-| <img src="assets/screenshots/splashScreen.png" width="250"> |
+| <img src="assets/screenShots/splashScreen.png" width="250"> |
 
 | Edit Note |
 |-----------|
